@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TinyClaude Web</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- Mobile overlay -->
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="resize-handle resize-handle-right" id="sidebarResizeHandle"></div>
+  <div class="sidebar-header">
+    <h2>TinyClaude</h2>
+    <button class="btn-new-session" id="btnNewSession" onclick="createNewSession()">+ 新会话</button>
+  </div>
+  <div class="session-list" id="sessionList"></div>
+  <div class="history-section" id="historySection">
+    <div class="history-header">📋 历史消息<span class="history-count" id="historyCount"></span></div>
+    <div class="history-list" id="historyList">
+      <div class="history-empty">暂无会话</div>
+    </div>
+  </div>
+</aside>
+
+<!-- Main -->
+<div class="main">
+  <div class="main-header">
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    <span class="session-title-text" id="sessionTitleText">新会话</span>
+    <span class="streaming-indicator" id="streamingIndicator"></span>
+  </div>
+  <div class="messages" id="messagesContainer">
+    <div class="no-session-state" id="noSessionState">
+      <div class="no-session-icon">💬</div>
+      <div class="no-session-text">请创建会话开始对话</div>
+      <button class="btn-no-session" onclick="createNewSession()">创建新会话</button>
+    </div>
+  </div>
+  <div class="input-area" id="inputArea" style="display: none;">
+    <textarea id="inputBox" placeholder="输入消息... (Shift+Enter 换行)" rows="1" onkeydown="handleKeyDown(event)"></textarea>
+    <button class="btn-send" id="btnSend" onclick="sendMessage()">发送</button>
+    <button class="btn-stop" id="btnStop" onclick="cancelGeneration()">停止</button>
+  </div>
+</div>
+
+<!-- File Panel -->
+<aside class="file-panel" id="filePanel">
+  <div class="resize-handle resize-handle-left" id="filePanelResizeHandle"></div>
+  <div class="file-panel-header">
+    <span>📂 工作区</span>
+    <button class="file-refresh-btn" id="fileRefreshBtn" onclick="refreshFiles()" title="刷新">🔄</button>
+  </div>
+  <div class="file-panel-breadcrumb" id="fileBreadcrumb"></div>
+  <div class="file-list" id="fileList">
+    <div class="file-preview-empty">加载中...</div>
+  </div>
+  <div class="file-preview" id="filePreview">
+    <div class="file-preview-header">
+      <button class="file-preview-back" onclick="closeFilePreview()">←</button>
+      <span class="file-preview-name" id="filePreviewName"></span>
+    </div>
+    <div class="file-preview-content" id="filePreviewContent"></div>
+  </div>
+</aside>
+
+<script src="/js/state.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/ui.js"></script>
+<script src="/js/session.js"></script>
+<script src="/js/chat.js"></script>
+<script src="/js/files.js"></script>
+<script src="/js/resize.js"></script>
+<script src="/js/init.js"></script>
+</body>
+</html>

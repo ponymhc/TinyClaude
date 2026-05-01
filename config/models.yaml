@@ -1,0 +1,34 @@
+deepseek_pro:
+  provider: deepseek
+  model: deepseek-v4-pro
+  api_key: DEEPSEEK_API_KEY
+  base_url: DEEPSEEK_BASE_URL
+  temperature: 0.7
+  streaming: true
+
+deepseek_flash:
+  provider: deepseek
+  model: deepseek-v4-flash
+  api_key: DEEPSEEK_API_KEY
+  base_url: DEEPSEEK_BASE_URL
+  temperature: 0.7
+  streaming: true
+  reasoning_effort: medium
+
+qwen3_8b:
+  provider: openai
+  model: Qwen/Qwen3-8B
+  api_key: SILICONFLOW_API_KEY
+  base_url: SILICONFLOW_BASE_URL
+  temperature: 0.7
+  streaming: true
+  timeout: 120
+
+deepseek_r1_distill_qwen_7b:
+  provider: openai
+  model: deepseek-ai/DeepSeek-R1-Distill-Qwen-7B
+  api_key: SILICONFLOW_API_KEY
+  base_url: SILICONFLOW_BASE_URL
+  temperature: 0.7
+  streaming: true
+  timeout: 120

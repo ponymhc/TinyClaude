@@ -1,0 +1,51 @@
+base_dir: ~/workspace/research/agent/TinyClaude
+models_config_path: config/models.yaml
+
+session:
+  agent:
+    model: deepseek_flash
+    dirname: ../workspace
+    shell: bash
+    python_path: /home/pony/miniconda3/envs/feature_lib/bin/python
+    language: auto
+    has_agent_tool: false
+    has_skill_tool: true
+    available_skills: []
+
+  storage:
+    dirname: session_storage
+    max_messages_in_memory: 100
+
+  token_budget:
+    max_tokens: 200000
+    warning_threshold: 0.8
+    auto_compact_threshold: 0.9
+
+  session_memory:
+    enabled: true
+    minimum_message_tokens_to_init: 10000
+    minimum_tokens_between_update: 5000
+    tool_calls_between_updates: 3
+    max_turns: 50
+    model_name: deepseek_reasoner
+    max_section_length: 2000
+    max_total_tokens: 12000
+
+  max_turns: null
+
+automemory:
+  enabled: true
+  throttle_turns: 1
+  dirname: memory
+  entrypoint_name: MEMORY.md
+  max_entrypoint_lines: 200
+  max_entrypoint_bytes: 25000
+  logs_subdir: logs
+  max_memory_files: 200
+  max_frontmatter_lines: 30
+  exclude_patterns:
+    - MEMORY.md
+    - .git
+    - __pycache__
+    - "*.pyc"
+  extraction_model: deepseek_reasoner
