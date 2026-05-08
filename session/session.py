@@ -9,7 +9,7 @@
 - 集成 token 计数与追踪（基于 litellm）
 """
 
-from compact.micro_compact import MicroCompactResult, compact_tool_results, collect_compactable_tool_ids
+# from compact.micro_compact import MicroCompactResult, compact_tool_results, collect_compactable_tool_ids
 from langchain_core.messages import BaseMessage, HumanMessage, AIMessage, ToolMessage, SystemMessage
 from session.storage import SessionStorage, StoredMessage, TokenUsage
 from utils.token import TokenCounter, TokenTracker, TokenBudget
@@ -469,56 +469,56 @@ class SessionManager:
             return 0
         return self.token_tracker.get_usage().total
 
-    def micro_compact(self, target_tokens: Optional[int] = None) -> MicroCompactResult:
-        """
-        执行微压缩（精简工具结果）
+    # def micro_compact(self, target_tokens: Optional[int] = None) -> MicroCompactResult:
+    #     """
+    #     执行微压缩（精简工具结果）
 
-        Args:
-            target_tokens: 目标保留的最大 token 数
+    #     Args:
+    #         target_tokens: 目标保留的最大 token 数
 
-        Returns:
-            MicroCompactResult 压缩结果
-        """
-        if not self.state:
-            raise RuntimeError("会话未初始化")
+    #     Returns:
+    #         MicroCompactResult 压缩结果
+    #     """
+    #     if not self.state:
+    #         raise RuntimeError("会话未初始化")
 
-        result = compact_tool_results(
-            self.state.messages,
-            target_tokens=target_tokens,
-        )
+    #     result = compact_tool_results(
+    #         self.state.messages,
+    #         target_tokens=target_tokens,
+    #     )
 
-        # 更新消息列表
-        self.state.messages = result.messages
+    #     # 更新消息列表
+    #     self.state.messages = result.messages
 
-        # 重新计算 token
-        if self.token_tracker:
-            self.token_tracker.reset()
-            self.token_tracker.add_messages(self.state.messages)
-            usage = self.token_tracker.get_usage()
-            self.state.total_tokens = usage.total
-            self.state.input_tokens = usage.input_tokens
-            self.state.output_tokens = usage.output_tokens
+    #     # 重新计算 token
+    #     if self.token_tracker:
+    #         self.token_tracker.reset()
+    #         self.token_tracker.add_messages(self.state.messages)
+    #         usage = self.token_tracker.get_usage()
+    #         self.state.total_tokens = usage.total
+    #         self.state.input_tokens = usage.input_tokens
+    #         self.state.output_tokens = usage.output_tokens
 
-        return result
+    #     return result
 
-    def should_auto_compact(self, threshold: Optional[float] = None) -> bool:
-        """
-        检查是否应该自动压缩
+    # def should_auto_compact(self, threshold: Optional[float] = None) -> bool:
+    #     """
+    #     检查是否应该自动压缩
 
-        Args:
-            threshold: 压缩阈值（None 使用配置中的 auto_compact_threshold）
+    #     Args:
+    #         threshold: 压缩阈值（None 使用配置中的 auto_compact_threshold）
 
-        Returns:
-            是否应该压缩
-        """
-        if not self.state or not self.token_budget:
-            return False
+    #     Returns:
+    #         是否应该压缩
+    #     """
+    #     if not self.state or not self.token_budget:
+    #         return False
 
-        if threshold is None:
-            threshold = self.token_budget.auto_compact_threshold
+    #     if threshold is None:
+    #         threshold = self.token_budget.auto_compact_threshold
 
-        current_usage = self.token_tracker.get_usage() if self.token_tracker else None
-        if not current_usage:
-            return False
+    #     current_usage = self.token_tracker.get_usage() if self.token_tracker else None
+    #     if not current_usage:
+    #         return False
 
-        return current_usage.total >= self.token_budget.max_tokens * threshold
+    #     return current_usage.total >= self.token_budget.max_tokens * threshold

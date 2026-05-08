@@ -19,7 +19,7 @@ from langchain_core.messages import BaseMessage, HumanMessage, AIMessage, ToolMe
 from session.storage import SessionStorage, StoredMessage
 from utils.token import TokenTracker
 from extract_memories import ExtractMemoriesRunner
-from session.memory import SessionMemoryRunner
+from session.session_memory import SessionMemoryRunner
 
 if TYPE_CHECKING:
     from session.session import SessionState

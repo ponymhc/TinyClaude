@@ -12,7 +12,7 @@ from .storage import (
 from .file_storage import FileSessionStorage
 from .config import SessionManagerConfig, StorageConfig, TokenBudgetConfig
 from .session import SessionManager, SessionState
-from . import memory
+from . import session_memory
 from utils.token import TokenUsage
 
 __all__ = [
@@ -29,7 +29,7 @@ __all__ = [
     "SessionManager",
     "SessionState",
     # memory
-    "memory",
+    "session_memory",
     # utils
     "TokenUsage",
     "TokenBudget",
