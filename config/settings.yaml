@@ -1,12 +1,12 @@
-base_dir: 'base dir'
+base_dir: ~/workspace/research/agent/TinyClaude
 models_config_path: config/models.yaml
 
 session:
   agent:
     model: deepseek_flash
-    dirname: 'work space dir'
+    dirname: ../workspace
     shell: bash
-    python_path: 'python path'
+    python_path: /home/pony/miniconda3/envs/feature_lib/bin/python
     language: auto
     has_agent_tool: false
     has_skill_tool: true

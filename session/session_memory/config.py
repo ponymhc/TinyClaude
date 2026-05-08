@@ -1,15 +1,3 @@
-"""
-Session Memory 配置模块
-
-参考 Claude Code: services/SessionMemory/sessionMemoryUtils.ts
-
-使用统一配置 (config/config.py)。
-
-导入方式:
-    from config.config import get_session_memory_config
-    from session.memory.config import SessionMemoryConfig, get_config  # 向后兼容
-"""
-
 from dataclasses import dataclass
 from typing import Optional
 

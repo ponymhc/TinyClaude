@@ -1,14 +1,3 @@
-"""
-Session Memory 主模块
-
-参考 Claude Code: services/SessionMemory/sessionMemory.ts
-
-Session Memory 自动维护一个 Markdown 文件，记录当前对话的关键信息。
-它使用后台任务定期提取信息，不中断主对话流程。
-
-使用 fork_agent 执行子代理进行摘要提取。
-"""
-
 import asyncio
 import logging
 import os

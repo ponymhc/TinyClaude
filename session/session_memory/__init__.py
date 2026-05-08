@@ -1,20 +1,3 @@
-"""
-Session Memory 模块
-
-自动维护一个 Markdown 文件，记录当前对话的关键信息。
-使用后台任务定期提取信息，不中断主对话流程。
-
-参考 Claude Code: services/SessionMemory/
-
-使用方式:
-    from session.memory import (
-        should_extract_memory,
-        extract_session_memory,
-        manually_extract_session_memory,
-        get_session_memory_content,
-    )
-"""
-
 from .config import (
     SessionMemoryConfig,
     get_config,

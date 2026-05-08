@@ -1,12 +1,3 @@
-"""
-Session Memory 路径工具模块
-
-参考 Claude Code: utils/permissions/filesystem.ts 中的 session memory 路径函数
-
-每个会话的 session memory 保存在 session_storage 下：
-- session_storage/{session_id}/session.md  (session memory)
-"""
-
 import os
 from pathlib import Path
 from typing import Optional
