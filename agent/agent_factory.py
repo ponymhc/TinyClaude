@@ -155,6 +155,7 @@ class AgentLoop:
             
     def _parse_message(self, msg: AIMessage) -> AIMessage:
         reasoning_content = msg.additional_kwargs.get('reasoning_content', '')
+        msg.reasoning_content = reasoning_content
         
         final_content = ""
         if isinstance(msg.content, list):

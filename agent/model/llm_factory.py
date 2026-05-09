@@ -6,6 +6,9 @@ LLM 模型工厂模块
 模型配置文件：config/models.yaml
 """
 
+from langchain_litellm.chat_models import litellm as litellm_chat_module
+from langchain_core.messages import AIMessage
+
 import os
 from pathlib import Path
 from typing import Optional
@@ -102,3 +105,30 @@ class LLMFactory:
         """重新加载配置（清除缓存）"""
         from config.config import reload_all_config
         reload_all_config()
+
+
+_original_convert_message_to_dict = litellm_chat_module._convert_message_to_dict
+
+def _patched_convert_message_to_dict(message):
+
+    message_dict = _original_convert_message_to_dict(message)
+
+    if isinstance(message, AIMessage):
+        reasoning = message.additional_kwargs.get("reasoning_content")
+        if reasoning:
+            message_dict["reasoning_content"] = reasoning
+
+            content = message_dict.get("content")
+            if isinstance(content, list):
+                clean_content = [
+                    block for block in content
+                    if not (isinstance(block, dict) and block.get("type") in ("thinking", "redacted_thinking"))
+                ]
+                if len(clean_content) == 1 and isinstance(clean_content[0], dict) and clean_content[0].get("type") == "text":
+                    message_dict["content"] = clean_content[0]["text"]
+                else:
+                    message_dict["content"] = clean_content
+
+    return message_dict
+
+litellm_chat_module._convert_message_to_dict = _patched_convert_message_to_dict
