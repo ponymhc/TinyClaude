@@ -27,7 +27,7 @@ session:
     minimum_tokens_between_update: 5000
     tool_calls_between_updates: 3
     max_turns: 50
-    model_name: deepseek_reasoner
+    model_name: deepseek_flash
     max_section_length: 2000
     max_total_tokens: 12000
 
@@ -48,4 +48,4 @@ automemory:
     - .git
     - __pycache__
     - "*.pyc"
-  extraction_model: deepseek_reasoner
+  extraction_model: deepseek_flash
